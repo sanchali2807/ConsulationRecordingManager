@@ -33,9 +33,15 @@ function App() {
 />
 
         <Route
-          path="/recordings/:id"
-          element={<RecordingDetailPage />}
-        />
+  path="/recordings/:id"
+  element={
+    <ProtectedRoute>
+
+      <RecordingDetailPage />
+
+    </ProtectedRoute>
+  }
+/>
 
       </Routes>
 

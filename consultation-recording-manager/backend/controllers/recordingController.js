@@ -184,7 +184,143 @@ const getRecordings =
         )
     });
   });
+
+
+  /**
+ * Get Single Recording
+ *
+ * req.params.id
+ *
+ * returns:
+ * one recording document
+ */
+const getRecordingById =
+  asyncHandler(async (
+    req,
+    res
+  ) => {
+
+    const recording =
+      await Recording.findById(
+        req.params.id
+      );
+
+    if (!recording) {
+
+      res.status(404);
+
+      throw new Error(
+        "Recording not found"
+      );
+    }
+
+    res.json(recording);
+  });
+
+
+  /**
+ * Update Recording
+ *
+ * req.params.id
+ * req.body:
+ * {
+ *   title,
+ *   notes,
+ *   tags
+ * }
+ *
+ * returns:
+ * updated recording
+ */
+const updateRecording =
+  asyncHandler(async (
+    req,
+    res
+  ) => {
+
+    const recording =
+      await Recording.findById(
+        req.params.id
+      );
+
+    if (!recording) {
+
+      res.status(404);
+
+      throw new Error(
+        "Recording not found"
+      );
+    }
+
+    recording.title =
+      req.body.title ??
+      recording.title;
+
+    recording.notes =
+      req.body.notes ??
+      recording.notes;
+
+    recording.tags =
+      req.body.tags ??
+      recording.tags;
+
+    const updated =
+      await recording.save();
+
+    res.json(updated);
+  });
+
+
+  /**
+ * Delete Recording
+ *
+ * req.params.id
+ *
+ * Deletes:
+ * - Cloudinary file
+ * - MongoDB document
+ */
+const deleteRecording =
+  asyncHandler(async (
+    req,
+    res
+  ) => {
+
+    const recording =
+      await Recording.findById(
+        req.params.id
+      );
+
+    if (!recording) {
+
+      res.status(404);
+
+      throw new Error(
+        "Recording not found"
+      );
+    }
+
+    await cloudinary.uploader.destroy(
+      recording.cloudinaryPublicId,
+      {
+        resource_type:
+          "video"
+      }
+    );
+
+    await recording.deleteOne();
+
+    res.json({
+      success: true,
+      message:
+        "Recording deleted"
+    });
+  });
+
   module.exports={
     createRecording,
-    getRecordings
+    getRecordings,
+    getRecordingById,
+    updateRecording,
+    deleteRecording
   }

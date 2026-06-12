@@ -42,3 +42,39 @@ export const getRecordings =
 
     return response.data;
   };
+
+
+  export const getRecordingById =
+  async (id) => {
+
+    const response =
+      await api.get(
+        `/recordings/${id}`
+      );
+
+    return response.data;
+  };
+
+
+  export const updateRecording =
+  async (id, data) => {
+
+    const response =
+      await api.put(
+        `/recordings/${id}`,
+        data
+      );
+
+    return response.data;
+  };
+
+  export const deleteRecording =
+  async (id) => {
+
+    const response =
+      await api.delete(
+        `/recordings/${id}`
+      );
+
+    return response.data;
+  };

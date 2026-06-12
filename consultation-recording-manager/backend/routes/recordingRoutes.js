@@ -16,7 +16,11 @@ const upload =
   );
 
 const {
-  createRecording,getRecordings
+  createRecording,
+  getRecordings,
+  getRecordingById,
+  updateRecording,
+  deleteRecording
 } = require(
   "../controllers/recordingController"
 );
@@ -31,6 +35,21 @@ router.post(
   upload.single("audio"),
   createRecording
 );
+router.get(
+  "/:id",
+  protect,
+  getRecordingById
+);
+router.put(
+  "/:id",
+  protect,
+  updateRecording
+);
 
+router.delete(
+  "/:id",
+  protect,
+  deleteRecording
+);
 module.exports =
   router;
