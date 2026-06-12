@@ -37,6 +37,8 @@ export default function DashboardPage() {
 
   const [status, setStatus] =
     useState("");
+    const [error, setError] =
+  useState("");
 
   const [dateFilter, setDateFilter] =
     useState("");
@@ -67,7 +69,9 @@ export default function DashboardPage() {
 
       } catch (error) {
 
-        console.log(error);
+       setError(
+  "Failed to load recordings"
+);
       }
     };
 
@@ -89,6 +93,23 @@ export default function DashboardPage() {
 
       if (!audio) {
 
+        if (!title.trim()) {
+
+  setMessage(
+    "Title is required"
+  );
+
+  return;
+}
+
+if (!clientName.trim()) {
+
+  setMessage(
+    "Client name is required"
+  );
+
+  return;
+}
         setMessage(
           "Please select an audio file"
         );
@@ -136,9 +157,9 @@ export default function DashboardPage() {
 
         console.log(error);
 
-        setMessage(
-          "Upload Failed"
-        );
+        setError(
+  "Upload Failed"
+);
 
       } finally {
 
@@ -154,14 +175,84 @@ export default function DashboardPage() {
     >
 
       <h1>Dashboard</h1>
+      {error && (
+  <p
+    style={{
+      color: "red"
+    }}
+  >
+    {error}
+  </p>
+)}
 
+<div
+  style={{
+    display: "flex",
+    gap: "20px",
+    marginBottom: "20px"
+  }}
+>
+
+  <div
+    style={{
+      border: "1px solid #ccc",
+      padding: "15px",
+      borderRadius: "8px"
+    }}
+  >
+    <h4>
+      Total Recordings
+    </h4>
+
+    <p>
+      {recordings.length}
+    </p>
+  </div>
+
+  <div
+    style={{
+      border: "1px solid #ccc",
+      padding: "15px",
+      borderRadius: "8px"
+    }}
+  >
+    <h4>
+      This Week
+    </h4>
+
+    <p>
+      {
+        recordings.filter(
+          r => {
+            const d =
+              new Date(
+                r.createdAt
+              );
+
+            const weekAgo =
+              new Date();
+
+            weekAgo.setDate(
+              weekAgo.getDate() - 7
+            );
+
+            return d >= weekAgo;
+          }
+        ).length
+      }
+    </p>
+  </div>
+
+</div>
       <SearchBar
         value={search}
-        onChange={(e) =>
+        onChange={(e) =>{
           setSearch(
             e.target.value
-          )
-        }
+          );
+          setPage(1);
+          
+        }}
       />
 
       <FilterPanel
@@ -234,10 +325,23 @@ export default function DashboardPage() {
       </h2>
 
       {recordings.length === 0 ? (
-        <p>
-          No recordings found
-        </p>
-      ) : (
+  <div
+    style={{
+      textAlign: "center",
+      padding: "40px"
+    }}
+  >
+    <h3>
+      No recordings found
+    </h3>
+
+    <p>
+      Upload your first
+      consultation recording
+      or adjust your filters.
+    </p>
+  </div>
+) : (
         recordings.map(
           (recording) => (
             <RecordingCard
