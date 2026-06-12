@@ -4,7 +4,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import RecordingDetailPage from "./pages/RecordingDetailPage";
-
+import ProtectedRoute
+from "./components/ProtectedRoute";
 function App() {
 
   return (
@@ -23,9 +24,13 @@ function App() {
         />
 
         <Route
-          path="/"
-          element={<DashboardPage />}
-        />
+  path="/"
+  element={
+    <ProtectedRoute>
+      <DashboardPage />
+    </ProtectedRoute>
+  }
+/>
 
         <Route
           path="/recordings/:id"

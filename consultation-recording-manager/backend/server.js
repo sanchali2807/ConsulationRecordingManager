@@ -9,6 +9,8 @@ const rateLimit = require("express-rate-limit");
 const connectDB = require("./config/db");
 const authRoutes =
   require("./routes/authRoutes");
+  const recordingRoutes =
+require("./routes/recordingRoutes");
 const {
   notFound,
   globalErrorHandler
@@ -76,6 +78,10 @@ app.get("/", (req, res) => {
 app.use(
   "/api/auth",
   authRoutes
+);
+app.use(
+  "/api/recordings",
+  recordingRoutes
 );
 app.use(notFound);
 
