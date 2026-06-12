@@ -19,11 +19,25 @@ export const uploadRecording =
   };
 
 export const getRecordings =
-  async () => {
+  async (
+    search = "",
+    page = 1,
+    status = "",
+    dateFilter = ""
+  ) => {
 
     const response =
       await api.get(
-        "/recordings"
+        "/recordings",
+        {
+          params: {
+            search,
+            page,
+            limit: 5,
+            status,
+            dateFilter
+          }
+        }
       );
 
     return response.data;

@@ -95,24 +95,95 @@ const asyncHandler =
  * Get all recordings
  */
 const getRecordings =
-  asyncHandler(
-    async (req, res) => {
+  asyncHandler(async (req, res) => {
 
-      const recordings =
-        await Recording
-          .find({
-            createdBy:
-              req.user._id
-          })
-          .sort({
-            createdAt: -1
-          });
+    const {
+      search = "",
+      page = 1,
+      limit = 5,
+      status,
+      dateFilter
+    } = req.query;
 
-      res.json(
-        recordings
-      );
+    const query = {
+      createdBy: req.user._id
+    };
+
+    /*
+      Search title OR client name
+    */
+    if (search) {
+
+      query.$or = [
+        {
+          title: {
+            $regex: search,
+            $options: "i"
+          }
+        },
+        {
+          clientName: {
+            $regex: search,
+            $options: "i"
+          }
+        }
+      ];
     }
-  );
+
+    /*
+      Status filter
+    */
+    if (status) {
+
+      query.status = status;
+    }
+
+    /*
+      Date filter
+    */
+    if (dateFilter === "7") {
+
+      const sevenDaysAgo =
+        new Date();
+
+      sevenDaysAgo.setDate(
+        sevenDaysAgo.getDate() - 7
+      );
+
+      query.createdAt = {
+        $gte: sevenDaysAgo
+      };
+    }
+
+    const total =
+      await Recording.countDocuments(
+        query
+      );
+
+    const recordings =
+      await Recording.find(query)
+        .sort({
+          createdAt: -1
+        })
+        .skip(
+          (page - 1) * limit
+        )
+        .limit(
+          Number(limit)
+        );
+
+    res.json({
+      recordings,
+      total,
+      currentPage:
+        Number(page),
+
+      totalPages:
+        Math.ceil(
+          total / limit
+        )
+    });
+  });
   module.exports={
     createRecording,
     getRecordings

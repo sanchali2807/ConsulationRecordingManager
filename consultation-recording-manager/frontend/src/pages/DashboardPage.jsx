@@ -1,6 +1,10 @@
 import { useState }
 from "react";
+import SearchBar
+from "../components/SearchBar";
 
+import FilterPanel
+from "../components/FilterPanel";
 import {
   uploadRecording
 } from "../services/recordingService";
@@ -36,6 +40,19 @@ const [
 
   const [message, setMessage] =
     useState("");
+    const [search, setSearch] =
+  useState("");
+
+const [page, setPage] =
+  useState(1);
+
+const [status, setStatus] =
+  useState("");
+
+const [
+  dateFilter,
+  setDateFilter
+] = useState("");
 
 const fetchRecordings =
   async () => {
@@ -43,11 +60,16 @@ const fetchRecordings =
     try {
 
       const data =
-        await getRecordings();
+  await getRecordings(
+    search,
+    page,
+    status,
+    dateFilter
+  );
 
-      setRecordings(
-        data
-      );
+setRecordings(
+  data.recordings
+);
 
     } catch (error) {
 
@@ -55,9 +77,16 @@ const fetchRecordings =
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
+
   fetchRecordings();
-}, []);
+
+}, [
+  search,
+  page,
+  status,
+  dateFilter
+]);
 
   const handleSubmit =
     async (e) => {
@@ -93,10 +122,6 @@ const fetchRecordings =
         setMessage(
           "Upload Successful"
         );
-
-//         await uploadRecording(
-//   formData
-// );
 
 await fetchRecordings();
         setTitle("");
