@@ -108,6 +108,20 @@ setTags(
 
     try {
 
+const currentTags =
+  recording.tags?.join(",") || "";
+
+if (
+  title.trim() ===
+    (recording.title || "").trim() &&
+  notes.trim() ===
+    (recording.notes || "").trim() &&
+  tags.trim() ===
+    currentTags.trim()
+) {
+  setIsEditing(false);
+  return;
+}
       setSaving(true);
 
       const updated =
@@ -354,16 +368,31 @@ career,finance,love"
     </button>
 
     <button
-      onClick={() =>
-        setIsEditing(false)
-      }
-      style={{
-        marginLeft:
-          "10px"
-      }}
-    >
-      Cancel
-    </button>
+  onClick={() => {
+
+    setTitle(
+      recording.title || ""
+    );
+
+    setNotes(
+      recording.notes || ""
+    );
+
+    setTags(
+      recording.tags?.join(",")
+      || ""
+    );
+
+    setIsEditing(false);
+
+  }}
+  style={{
+    marginLeft:
+      "10px"
+  }}
+>
+  Cancel
+</button>
   </>
 ) : (
   <button
