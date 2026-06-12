@@ -188,6 +188,18 @@ alert(
       }}
     >
 
+<button
+  onClick={() =>
+    navigate(-1)
+  }
+  style={{
+    marginBottom: "20px",
+    padding: "8px 16px",
+    cursor: "pointer"
+  }}
+>
+  ← Back
+</button>
       <h1>
         {recording.title}
       </h1>

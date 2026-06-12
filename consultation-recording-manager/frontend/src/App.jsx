@@ -4,13 +4,15 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import DashboardPage from "./pages/DashboardPage";
 import RecordingDetailPage from "./pages/RecordingDetailPage";
+import Navbar from "./components/Navbar";
+import NotFound from "./pages/NotFound";
 import ProtectedRoute
 from "./components/ProtectedRoute";
 function App() {
 
   return (
     <BrowserRouter>
-
+      <Navbar/>
       <Routes>
 
         <Route
@@ -40,6 +42,12 @@ function App() {
       <RecordingDetailPage />
 
     </ProtectedRoute>
+  }
+/>
+<Route
+  path="*"
+  element={
+    <NotFound />
   }
 />
 
