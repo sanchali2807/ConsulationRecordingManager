@@ -38,6 +38,8 @@ export default function RecordingDetailPage() {
 
   const [notes, setNotes] =
   useState("");
+  const [title, setTitle] =
+  useState("");
 
 const [tags, setTags] =
   useState("");
@@ -67,6 +69,9 @@ const [saving, setSaving] =
           setRecording(
             data
           );
+          setTitle(
+  data.title || ""
+);
           setNotes(
   data.notes || ""
 );
@@ -107,22 +112,24 @@ setTags(
 
       const updated =
         await updateRecording(
-          id,
-          {
-            notes,
-
-            tags:
-              tags
-                .split(",")
-                .map(
-                  tag =>
-                    tag.trim()
-                )
-                .filter(Boolean)
-          }
-        );
+  id,
+  {
+    title,
+    notes,
+    tags:
+      tags
+        .split(",")
+        .map(tag =>
+          tag.trim()
+        )
+        .filter(Boolean)
+  }
+);
 
       setRecording(updated);
+      setTitle(
+  updated.title || ""
+);
 
 setNotes(
   updated.notes || ""
@@ -200,9 +207,27 @@ alert(
 >
   ← Back
 </button>
-      <h1>
-        {recording.title}
-      </h1>
+      {isEditing ? (
+  <input
+    type="text"
+    value={title}
+    onChange={(e) =>
+      setTitle(
+        e.target.value
+      )
+    }
+    style={{
+      fontSize: "24px",
+      padding: "8px",
+      width: "100%",
+      marginBottom: "15px"
+    }}
+  />
+) : (
+  <h1>
+    {recording.title}
+  </h1>
+)}
 
       <p>
         Client:
