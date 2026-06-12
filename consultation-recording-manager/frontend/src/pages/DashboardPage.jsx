@@ -374,14 +374,18 @@ if (!clientName.trim()) {
         </button>
 
         <span
-          style={{
-            margin:
-              "0 10px"
-          }}
-        >
-          Page {page} of{" "}
-          {totalPages}
-        </span>
+  style={{
+    margin: "0 10px"
+  }}
+>
+  Page {
+    recordings.length
+      ? page
+      : 0
+  } of {
+    totalPages || 0
+  }
+</span>
 
         <button
           disabled={
