@@ -13,32 +13,33 @@ export default function RecordingCard({
 
       <div>
 
-        <h3>
-          {recording.title}
-        </h3>
+       <div className="recording-info">
 
-        <p>
-          Client:
-          {" "}
-          {recording.clientName}
-        </p>
+  <h3 className="recording-title">
+    {recording.title}
+  </h3>
 
-        <p>
-          Status:
-          {" "}
-          {recording.status}
-        </p>
+  <p className="recording-meta">
+    <strong>Client:</strong>
+    {" "}
+    {recording.clientName}
+  </p>
 
-        <p>
-          Created:
-          {" "}
-          {
-            new Date(
-              recording.createdAt
-            ).toLocaleDateString()
-          }
-        </p>
+  <p className="recording-meta">
+    <strong>Status:</strong>
+    {" "}
+    {recording.status}
+  </p>
 
+  <p className="recording-meta">
+    <strong>Created:</strong>
+    {" "}
+    {new Date(
+      recording.createdAt
+    ).toLocaleDateString()}
+  </p>
+
+</div>
       </div>
 
       <Link

@@ -171,12 +171,11 @@ if (!clientName.trim()) {
     <>
     <div className="page-container">
       <div
-      style={{
-        padding: "20px"
-      }}
     >
 
-      <h1>Dashboard</h1>
+      <div className="dashboard-header">
+  <h1>Dashboard</h1>
+</div>
       {error && (
   <p
     style={{
@@ -244,6 +243,7 @@ className="stats-container"
   </div>
 
 </div>
+<div className="filters-section">
       <SearchBar
         value={search}
         onChange={(e) =>{
@@ -265,7 +265,7 @@ className="stats-container"
       />
 
       <hr />
-
+</div>
       <form
       className="upload-form"
         onSubmit={
@@ -322,9 +322,9 @@ className="stats-container"
 
       <hr />
 
-      <h2>
-        My Recordings
-      </h2>
+      <h2 className="section-title">
+  My Recordings
+</h2>
 
       {recordings.length === 0 ? (
   <div
@@ -375,11 +375,7 @@ className="stats-container"
         )
       )}
 
-      <div
-        style={{
-          marginTop: "20px"
-        }}
-      >
+     <div className="pagination">
 
         <button
           disabled={page === 1}

@@ -311,7 +311,7 @@ className="primary-btn"
       />
 </div>
       <hr />
-< div className="info-section">
+<div className="info-section">
     <h3>Notes</h3>
 
 {isEditing ? (
@@ -384,8 +384,7 @@ career,finance,love"
   </div>
 )}
 </div>
-<br />
-<br />
+
 <div className="action-buttons">
 <button
 className="primary-btn"
@@ -400,8 +399,7 @@ className="primary-btn"
       : "Restore Recording"
   }
 </button>
-<br />
-<br />
+
 
 {isEditing ? (
   <>
@@ -460,8 +458,7 @@ className="primary-btn"
   </button>
   
 )}
-<br />
-<br />
+
 <button
 className="delete-btn"
   onClick={
