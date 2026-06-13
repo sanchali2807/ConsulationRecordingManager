@@ -21,16 +21,6 @@ export default function Navbar() {
 
   return (
     <nav className="navbar"
-      style={{
-        padding: "15px",
-        display: "flex",
-        justifyContent:
-          "space-between",
-        alignItems:
-          "center",
-        borderBottom:
-          "1px solid #ddd"
-      }}
     >
       <h2>
         Consultation Manager

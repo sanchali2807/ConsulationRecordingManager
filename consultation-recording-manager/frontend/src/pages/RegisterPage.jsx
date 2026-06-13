@@ -2,6 +2,7 @@ import {
   useState
 } from "react";
 
+import { Link } from "react-router-dom";
 import {
   useNavigate
 } from "react-router-dom";
@@ -79,56 +80,59 @@ export default function RegisterPage() {
       }
     };
 
-  return (
-    <div>
 
-      <h1>Register</h1>
+return (
+  <div className="auth-container">
 
-      {error && <p>{error}</p>}
+    <form
+      className="auth-card"
+      onSubmit={handleSubmit}
+    >
 
-      <form
-        onSubmit={
-          handleSubmit
-        }
+      <h1>Create Account</h1>
+
+      {error && (
+        <p className="error-text">
+          {error}
+        </p>
+      )}
+
+      <input
+        name="name"
+        placeholder="Full Name"
+        onChange={handleChange}
+      />
+
+      <input
+        name="email"
+        placeholder="Email Address"
+        onChange={handleChange}
+      />
+
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        onChange={handleChange}
+      />
+
+      <button
+        className="primary-btn"
+        type="submit"
       >
+        {loading
+          ? "Creating Account..."
+          : "Register"}
+      </button>
 
-        <input
-          name="name"
-          placeholder="Name"
-          onChange={
-            handleChange
-          }
-        />
+      <p className="auth-switch">
+        Already have an account?
+        <Link to="/login">
+          Login
+        </Link>
+      </p>
 
-        <input
-          name="email"
-          placeholder="Email"
-          onChange={
-            handleChange
-          }
-        />
+    </form>
 
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={
-            handleChange
-          }
-        />
-
-        <button
-          type="submit"
-        >
-          {
-            loading
-              ? "Loading..."
-              : "Register"
-          }
-        </button>
-
-      </form>
-
-    </div>
-  );
-}
+  </div>
+);}

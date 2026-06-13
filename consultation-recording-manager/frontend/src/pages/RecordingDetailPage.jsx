@@ -257,7 +257,6 @@ className="primary-btn"
 >
   ← Back
 </button>
-<div className="detail-card">
       {isEditing ? (
   <input
     type="text"
@@ -304,15 +303,15 @@ className="primary-btn"
           recording.createdAt
         ).toLocaleDateString()}
       </p>
-
+<div className="audio-section">
       <AudioPlayer
         url={
           recording.recordingUrl
         }
       />
-
+</div>
       <hr />
-
+< div className="info-section">
     <h3>Notes</h3>
 
 {isEditing ? (
@@ -384,7 +383,7 @@ career,finance,love"
     }
   </div>
 )}
-
+</div>
 <br />
 <br />
 <div className="action-buttons">
@@ -472,7 +471,7 @@ className="delete-btn"
   Delete Recording
 </button>
 </div>
-    </div>
+   
     </div>
     </div>
     </>

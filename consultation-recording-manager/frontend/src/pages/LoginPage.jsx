@@ -1,108 +1,74 @@
-import {
-  useState
-} from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import {
-  useNavigate
-} from "react-router-dom";
-
-import {
-  useAuth
-} from "../context/AuthContext";
-
-import {
-  login
-} from "../services/authService";
+import { useAuth } from "../context/AuthContext";
+import { login } from "../services/authService";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
 
-  const navigate =
-    useNavigate();
+  const { setUser } = useAuth();
 
-  const { setUser } =
-    useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [email, setEmail] =
-    useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const [
-    password,
-    setPassword
-  ] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const [loading, setLoading] =
-    useState(false);
+    try {
+      setLoading(true);
 
-  const [error, setError] =
-    useState("");
+      const data = await login({
+        email,
+        password,
+      });
 
-  const handleSubmit =
-    async (e) => {
+      localStorage.setItem(
+        "token",
+        data.token
+      );
 
-      e.preventDefault();
+      localStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
 
-      try {
+      setUser(data.user);
 
-        setLoading(true);
-
-        const data =
-          await login({
-            email,
-            password
-          });
-
-        localStorage.setItem(
-          "token",
-          data.token
-        );
-
-        localStorage.setItem(
-          "user",
-          JSON.stringify(
-            data.user
-          )
-        );
-
-        setUser(
-          data.user
-        );
-
-        navigate("/");
-
-      } catch (err) {
-
-        setError(
-          err.response?.data
-            ?.message ||
+      navigate("/");
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
           "Login Failed"
-        );
-
-      } finally {
-
-        setLoading(false);
-      }
-    };
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div>
-
-      <h1>Login</h1>
-
-      {error && <p>{error}</p>}
-
+    <div className="auth-container">
       <form
-        onSubmit={
-          handleSubmit
-        }
+        className="auth-card"
+        onSubmit={handleSubmit}
       >
+        <h1>Welcome Back</h1>
+
+        {error && (
+          <p className="error-text">
+            {error}
+          </p>
+        )}
 
         <input
-          placeholder="Email"
+          type="email"
+          placeholder="Email Address"
           value={email}
           onChange={(e) =>
-            setEmail(
-              e.target.value
-            )
+            setEmail(e.target.value)
           }
         />
 
@@ -111,24 +77,26 @@ export default function LoginPage() {
           placeholder="Password"
           value={password}
           onChange={(e) =>
-            setPassword(
-              e.target.value
-            )
+            setPassword(e.target.value)
           }
         />
 
         <button
+          className="primary-btn"
           type="submit"
         >
-          {
-            loading
-              ? "Loading..."
-              : "Login"
-          }
+          {loading
+            ? "Logging In..."
+            : "Login"}
         </button>
 
+        <p className="auth-switch">
+          Don't have an account?{" "}
+          <Link to="/register">
+            Register
+          </Link>
+        </p>
       </form>
-
     </div>
   );
 }
