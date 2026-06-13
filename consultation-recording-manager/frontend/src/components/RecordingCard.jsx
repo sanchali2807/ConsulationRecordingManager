@@ -8,27 +8,44 @@ export default function RecordingCard({
 
   return (
     <div
-      style={{
-        border:
-          "1px solid gray",
-        padding: "10px",
-        margin: "10px"
-      }}
+      className="recording-card"
     >
-      <h3>
-        {recording.title}
-      </h3>
 
-      <p>
-        {
-          recording.clientName
-        }
-      </p>
+      <div>
+
+        <h3>
+          {recording.title}
+        </h3>
+
+        <p>
+          Client:
+          {" "}
+          {recording.clientName}
+        </p>
+
+        <p>
+          Status:
+          {" "}
+          {recording.status}
+        </p>
+
+        <p>
+          Created:
+          {" "}
+          {
+            new Date(
+              recording.createdAt
+            ).toLocaleDateString()
+          }
+        </p>
+
+      </div>
 
       <Link
+        className="view-btn"
         to={`/recordings/${recording._id}`}
       >
-        View
+        View Details →
       </Link>
 
     </div>

@@ -257,6 +257,7 @@ className="primary-btn"
 >
   ← Back
 </button>
+<div className="detail-card">
       {isEditing ? (
   <input
     type="text"
@@ -278,6 +279,7 @@ className="primary-btn"
     {recording.title}
   </h1>
 )}
+
 
       <p>
         Client:
@@ -385,7 +387,7 @@ career,finance,love"
 
 <br />
 <br />
-
+<div className="action-buttons">
 <button
 className="primary-btn"
   onClick={
@@ -398,17 +400,6 @@ className="primary-btn"
       ? "Archive Recording"
       : "Restore Recording"
   }
-</button>
-
-<br />
-<br />
-<button
-className="primary-btn"
-  onClick={
-    handleDelete
-  }
->
-  Delete Recording
 </button>
 <br />
 <br />
@@ -456,6 +447,7 @@ className="primary-btn"
   </>
 ) : (
   <button
+  className="primary-btn"
     onClick={() =>
       setIsEditing(true)
     }
@@ -467,8 +459,20 @@ className="primary-btn"
         : "Add Notes & Tags"
     }
   </button>
+  
 )}
-
+<br />
+<br />
+<button
+className="delete-btn"
+  onClick={
+    handleDelete
+  }
+>
+  Delete Recording
+</button>
+</div>
+    </div>
     </div>
     </div>
     </>
