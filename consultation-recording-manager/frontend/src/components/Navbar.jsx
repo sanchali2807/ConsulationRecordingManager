@@ -20,7 +20,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav
+    <nav className="navbar"
       style={{
         padding: "15px",
         display: "flex",
@@ -48,6 +48,7 @@ export default function Navbar() {
         </Link>
 
         <button
+        className="primary-btn"
           onClick={
             handleLogout
           }

@@ -253,17 +253,22 @@ const updateRecording =
     }
 
     recording.title =
-      req.body.title ??
-      recording.title;
+  req.body.title ??
+  recording.title;
 
-    recording.notes =
-      req.body.notes ??
-      recording.notes;
+recording.notes =
+  req.body.notes ??
+  recording.notes;
 
-    recording.tags =
-      req.body.tags ??
-      recording.tags;
+recording.tags =
+  req.body.tags ??
+  recording.tags;
 
+recording.status =
+  req.body.status ??
+  recording.status;
+
+      
     const updated =
       await recording.save();
 

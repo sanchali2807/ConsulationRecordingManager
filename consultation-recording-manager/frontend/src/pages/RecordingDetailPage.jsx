@@ -170,6 +170,38 @@ alert(
       setSaving(false);
     }
   };
+
+
+const handleArchive =
+  async () => {
+
+    try {
+
+      const updated =
+        await updateRecording(
+          id,
+          {
+            status:
+              recording.status ===
+              "active"
+                ? "archived"
+                : "active"
+          }
+        );
+
+      setRecording(
+        updated
+      );
+
+    } catch (error) {
+
+      alert(
+        "Status update failed"
+      );
+    }
+  };
+
+
   const handleDelete =
   async () => {
 
@@ -203,13 +235,17 @@ alert(
   };
 
   return (
+    <>
+    <div className="page-container">
     <div
-      style={{
-        padding: "20px"
-      }}
+      // style={{
+      //   padding: "20px"
+      // }}
+      className="detail-card"
     >
 
 <button
+className="primary-btn"
   onClick={() =>
     navigate(-1)
   }
@@ -319,17 +355,24 @@ career,finance,love"
               <span
                 key={tag}
                 style={{
-                  padding:
-                    "6px 12px",
-                  margin:
-                    "4px",
-                  borderRadius:
-                    "20px",
-                  background:
-                    "#ddd",
-                  display:
-                    "inline-block"
-                }}
+  padding:
+    "8px 16px",
+
+  margin:
+    "4px",
+
+  borderRadius:
+    "50px",
+
+  background:
+    "linear-gradient(135deg,#2563eb,#4f46e5)",
+
+  color:
+    "white",
+
+  display:
+    "inline-block"
+}}
               >
                 {tag}
               </span>
@@ -344,6 +387,23 @@ career,finance,love"
 <br />
 
 <button
+className="primary-btn"
+  onClick={
+    handleArchive
+  }
+>
+  {
+    recording.status ===
+    "active"
+      ? "Archive Recording"
+      : "Restore Recording"
+  }
+</button>
+
+<br />
+<br />
+<button
+className="primary-btn"
   onClick={
     handleDelete
   }
@@ -410,5 +470,7 @@ career,finance,love"
 )}
 
     </div>
+    </div>
+    </>
   );
 }

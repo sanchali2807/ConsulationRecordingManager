@@ -168,7 +168,9 @@ if (!clientName.trim()) {
     };
 
   return (
-    <div
+    <>
+    <div className="page-container">
+      <div
       style={{
         padding: "20px"
       }}
@@ -186,19 +188,21 @@ if (!clientName.trim()) {
 )}
 
 <div
-  style={{
-    display: "flex",
-    gap: "20px",
-    marginBottom: "20px"
-  }}
+className="stats-container"
+  // style={{
+  //   display: "flex",
+  //   gap: "20px",
+  //   marginBottom: "20px"
+  // }}
 >
 
   <div
-    style={{
-      border: "1px solid #ccc",
-      padding: "15px",
-      borderRadius: "8px"
-    }}
+  className="stat-card"
+    // style={{
+    //   border: "1px solid #ccc",
+    //   padding: "15px",
+    //   borderRadius: "8px"
+    // }}
   >
     <h4>
       Total Recordings
@@ -210,11 +214,7 @@ if (!clientName.trim()) {
   </div>
 
   <div
-    style={{
-      border: "1px solid #ccc",
-      padding: "15px",
-      borderRadius: "8px"
-    }}
+    className="stat-card"
   >
     <h4>
       This Week
@@ -267,6 +267,7 @@ if (!clientName.trim()) {
       <hr />
 
       <form
+      className="upload-form"
         onSubmit={
           handleSubmit
         }
@@ -305,6 +306,7 @@ if (!clientName.trim()) {
         />
 
         <button
+        className="primary-btn"
           type="submit"
         >
           {loading
@@ -342,6 +344,7 @@ if (!clientName.trim()) {
   </p>
 
   <button
+  className="primary-btn"
     onClick={() => {
 
       setSearch("");
@@ -419,5 +422,7 @@ if (!clientName.trim()) {
       </div>
 
     </div>
+    </div>
+    </>
   );
 }
