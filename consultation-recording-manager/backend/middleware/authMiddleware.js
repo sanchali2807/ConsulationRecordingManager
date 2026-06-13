@@ -5,10 +5,7 @@ const User = require("../models/User");
 const asyncHandler =
   require("../utils/asyncHandler");
 
-/**
- * Verify JWT token
- * and attach user
- */
+
 const protect = asyncHandler(
   async (req, res, next) => {
 

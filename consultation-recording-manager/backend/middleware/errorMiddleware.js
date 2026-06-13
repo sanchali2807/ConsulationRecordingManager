@@ -1,6 +1,4 @@
-/**
- * Runs when no route matches.
- */
+
 const notFound = (req, res, next) => {
   const error = new Error(
     `Route not found - ${req.originalUrl}`
@@ -11,9 +9,7 @@ const notFound = (req, res, next) => {
   next(error);
 };
 
-/**
- * Global error handler.
- */
+
 const globalErrorHandler = (
   err,
   req,

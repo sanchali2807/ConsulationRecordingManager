@@ -91,9 +91,7 @@ const asyncHandler =
   );
 
 
-  /**
- * Get all recordings
- */
+ 
 const getRecordings =
   asyncHandler(async (req, res) => {
 
@@ -109,9 +107,7 @@ const getRecordings =
       createdBy: req.user._id
     };
 
-    /*
-      Search title OR client name
-    */
+  
     if (search) {
 
       query.$or = [
@@ -130,17 +126,13 @@ const getRecordings =
       ];
     }
 
-    /*
-      Status filter
-    */
     if (status) {
 
       query.status = status;
     }
 
-    /*
-      Date filter
-    */
+
+    
     if (dateFilter === "7") {
 
       const sevenDaysAgo =
@@ -186,14 +178,7 @@ const getRecordings =
   });
 
 
-  /**
- * Get Single Recording
- *
- * req.params.id
- *
- * returns:
- * one recording document
- */
+
 const getRecordingById =
   asyncHandler(async (
     req,
@@ -218,20 +203,7 @@ const getRecordingById =
   });
 
 
-  /**
- * Update Recording
- *
- * req.params.id
- * req.body:
- * {
- *   title,
- *   notes,
- *   tags
- * }
- *
- * returns:
- * updated recording
- */
+ 
 const updateRecording =
   asyncHandler(async (
     req,
@@ -276,15 +248,7 @@ recording.status =
   });
 
 
-  /**
- * Delete Recording
- *
- * req.params.id
- *
- * Deletes:
- * - Cloudinary file
- * - MongoDB document
- */
+
 const deleteRecording =
   asyncHandler(async (
     req,

@@ -21,19 +21,7 @@ const generateToken = (user) => {
 
 
 
-/**
- * Register User
- *
- * req.body:
- * {
- *   name,
- *   email,
- *   password
- * }
- *
- * returns:
- * user + jwt
- */
+
 const registerUser = asyncHandler(
   async (req, res) => {
 
@@ -79,18 +67,7 @@ const registerUser = asyncHandler(
 );
 
 
-/**
- * Login User
- *
- * req.body:
- * {
- *   email,
- *   password
- * }
- *
- * returns:
- * jwt + user
- */
+
 const loginUser = asyncHandler(
   async (req, res) => {
 
