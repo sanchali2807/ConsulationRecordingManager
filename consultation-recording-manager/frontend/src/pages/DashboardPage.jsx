@@ -326,21 +326,37 @@ if (!clientName.trim()) {
 
       {recordings.length === 0 ? (
   <div
-    style={{
-      textAlign: "center",
-      padding: "40px"
+  style={{
+    textAlign: "center",
+    padding: "40px"
+  }}
+>
+  <h3>
+    No recordings found
+  </h3>
+
+  <p>
+    Try adjusting your
+    search criteria or
+    filters.
+  </p>
+
+  <button
+    onClick={() => {
+
+      setSearch("");
+
+      setStatus("");
+
+      setDateFilter("");
+
+      setPage(1);
+
     }}
   >
-    <h3>
-      No recordings found
-    </h3>
-
-    <p>
-      Upload your first
-      consultation recording
-      or adjust your filters.
-    </p>
-  </div>
+    Clear Filters
+  </button>
+</div>
 ) : (
         recordings.map(
           (recording) => (
